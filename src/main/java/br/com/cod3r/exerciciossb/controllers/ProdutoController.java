@@ -1,8 +1,10 @@
 package br.com.cod3r.exerciciossb.controllers;
 
+import java.awt.print.Pageable;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +21,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/produtos")
 public class ProdutoController {
 	
-	@Autowired
+	@Autowired 
 	private ProdutoRepository produtoRepository;
 
 	@PostMapping
@@ -31,6 +33,12 @@ public class ProdutoController {
 	@GetMapping
 	public Iterable<Produto> obterProdutos() {
 		return produtoRepository.findAll();
+	}
+	
+	@GetMapping(path = "/pagina/{numeroPagina}")
+	public Iterable<Produto> obterProdutosPorPagina(@PathVariable int numeroPagina){
+		Pageable page = PageRequest.of(0, 3);
+		return produtoRepository.findAll(page);
 	}
 	
 	@GetMapping(path = "{/id}")
@@ -48,4 +56,6 @@ public class ProdutoController {
 	public void excluirProduto(@PathVariable int id) {
 		produtoRepository.deleteById(id);
 	}
+	
+	
 }

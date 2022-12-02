@@ -1,11 +1,10 @@
 package br.com.cod3r.exerciciossb.model.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import br.com.cod3r.exerciciossb.model.entities.Produto;
 
-@Repository
-public interface ProdutoRepository extends CrudRepository<Produto, Integer> {
+
+public interface ProdutoRepository extends PagingAndSortingRepository<Produto, Integer> {
 
 }
